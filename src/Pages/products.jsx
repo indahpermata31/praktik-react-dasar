@@ -1,4 +1,5 @@
 import { Fragment, useEffect, useRef, useState } from "react";
+import { NavLink } from "react-router-dom";
 import Button from "../componens/Elements/Button";
 import CardProduct from "../componens/Fragmen/CardProduct";
 import Counter from "../componens/Fragmen/Counter";
@@ -8,8 +9,8 @@ import { useLogin } from "../hooks/useLogin";
 
 
 const ProductsPage = () => {
-  const [cart, setCart] = useState([]);
-  const [totalPrice, setTotalprice] = useState(0);
+  const [cart, setCart] = useState([]); // Destructuring adalah fitur untuk mengekstrak  nilai dari object atau array ke dalam varibel terpisah secara ringkas. Dan fitur ini sering dipakai untuk mengurai propss dan state agar kode lebih bersih dan mudah dibaca.
+  const [totalPrice, setTotalprice] = useState(0); // useState
   const [products, setProducts] = useState([]);
   const username = useLogin();
 
