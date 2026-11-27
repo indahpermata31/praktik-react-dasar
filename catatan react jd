@@ -1,104 +1,114 @@
-{/* <p className="text-sm mt-5 text-center">
-            {type === "login" ? //conditional rendering ternary dan ini hanya bisa digunakan jika cuman ada 2 seperti login dan register, jika lebih dari dua tidak bisa menggunakan seperti ini
-            "Don't have an account? " 
-            : "Already have an account?"}
-            
-            {type === "login" && ( //conditional rendering and, dan kalo menggunakan and ini kita bisa render satu satu
-            <Link to="/register" className="font-bold text-blue-600">
-            Sign Up
-            </Link>
-            )}
-
-            {type === "register" && ( //conditional rendering and
-            <Link to="/login" className="font-bold text-blue-600">
-            Login
-            </Link>
-            )}
-
-        </p> */}
-
-
-
-// ini di products
-
-{products.map((product) => (
-        <!-- <CardProduct key={product.id}>
-        <CardProduct.Header image={product.image}/>
-        <CardProduct.Body name={product.name}>
-          {product.description}
-        </CardProduct.Body>
-        <CardProduct.Footer price={product.price}/>
-      </CardProduct> -->
-))}
-
-<!-- 
-<ul>
-            {cart.map((item) => (
-              <li key={item}>{item.id}</li>
-            ))}
-          </ul> -->
+<!-- CATATAN REACT JS:
+	1. Perbedaan state dan props - > state(bisa berubah-ubah), sedangkan props(tidak bisa berubah-ubah).
+	2. Lifecycle -> mounting (fase dimana sebuah component diciptakan), updating (component dimana sebuah vase itu bertumbuh,berkembang, ada perubahan), unmounting(ketika component nya dihancurkan atau tidak ditampilkan lagi di dalam websitenya). Nah kemudian setelah 3 vase tersebut dibagi lagi, ada fase render(pure tidak bisa diubah-ubah), fase commit(bisa melakukan updating,scheduling, dan dimana bisanya bekerja menggunakan DOM).
+	3. Use Effect itu adalah sebuah hooks yang bisa kita gunakan untuk memanipulasi.
+	4. Bedanya JSON stringify dan JSON.parse -> (kalo JSON.stringify adalah fungsi untuk mengonversi js value menjadi js string), (nah kalo JSON.parse adalah fungsi untuk mengonversi JSON string menjadi object).
+	5. Perbedaan render dan return -> render (adalah fungsi yang sebenarnya di panggil dalam componen atau metode yang memberi tahu react apa yang harus di tampilkan), sedangkan return (adalah hasil yang dirender atau return adalah output dari metode atau fungsi tersebut ). Ibaratnya render() itu seperti pemanasan dan perencanaan sebelum pertandingan dimulai. Semua orang tahu apa yang akan terjadi, dan return adalah pemain di lapangan yang benar-benar melakukan apa yang akan di perintahkan oleh render(). Secara singkatnya render adalah metode yang memberi tahu react apa yang harus ditampilkan. Sedangkan return adalah sebuah metode / memberikan output dari sebuah fungsi.
+	6. useState adalah hook buat nyimpen dan mengatur data (state) di dalam component. Ibaratnya kayak laci pribadi component buat nyimpen data yang bisa berubah. 
+	Bentuk umum:
+	Const [count, setCount] = useState<number>(0);
+	 - count : nilai sekarang.
+	 - setCount : fungsi buat update nilai count.
+	Kapan pakai useState?
+	Kalau kamu ingin nyimpen data yang:
+	 - bisa berubah (dinamis).
+	 - dibutuhkan saat render ulang.
+	7. useEffect adalah hook buat ngejalanin efek samping (side effects). Maksudnya, hal-hal yang gak langsung berhubungan sama proses render react, kayak:
+	 - ambil data dari API.
+	 - manipulasi document.title.
+	 - simpan data ke localStorage.
+	 - timer/interval.
+	 - event listener.
+	8. DOM( Document Object Model ) adalah antarmuka pemrograman (API) yang mempresentasikan struktur halaman web (HTML/XML) sebagai susunan object berbentuk pohon (tree).
+	9. Destructuring adalah fitur untuk mengekstrak nilai dari object atau array ke dalam variabel secara terpisah dan ringkas. Dan fitur ini sering dipakai untuk mengurai props dan state agar kode lebih bersih dan mudah dibaca.
+	• Destructuring props(object): mengambil properti langsung dari object props tanpa menulis props berulang kali.
+	Contoh:
+	• Destructuring useState (arrat): mengambil nilai state dan fungsi pengubahnya berdasarkan urutan indeks array.
+	• Rename & default value: mengganti nama variabel atau memberi nilai bawaan jika nilainya undefined.
+	• Rest operator (...) : sering dipakai bersamaan untuk mengumpulkan sisa properti atau element ke variabel baru. -->
 
 
-<!-- setCart ([
-      ...cart,
-      {
-      id,
-      qty: 1,
-    },
-    ]) -->
 
-<!-- 
-    componentDidMount() {
-      this.setState({count: 1});
-      console.log("componenDidMount");
-    }
-
-    componentDidUpdate (prevProps, prevState) {
-      console.log("componentDidUpdate");
-      if (this.state.count === 10) {
-        this.setState({ count: 0 });
-      }
-    } -->
-
-
-    <!-- {
-      id: 1,
-      qty: 1,
-    }, -->
-
-// ini nanti bisa dihapus hanya untuk dicoba saja
-      <!-- <div className="mt-5 flex justify-center mb-5">
-        <Counter></Counter>
-      </div> -->
-
-
-<!-- const products = [
-  {
-    id: 1,
-    name: "New Shoes",
-    price: 1000000,
-    image: "/images/shoes1.jpg",
-    description: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci,
-          eaque quisquam quia necessitatibus fugit placeat dolorem cupiditate
-          totam deserunt officia nobis blanditiis fugiat. Quidem possimus magnam
-          perferendis, minima excepturi similique!`,
-  },
-  {
-    id: 2,
-    name: "Old Shoes",
-    price: 500000,
-    image: "/images/shoes1.jpg",
-    description: `Lorem ipsum, dolor sit amet consectetur adipisicing elit.`,
-  },
-  {
-    id: 3,
-    name: "Collection Shoes",
-    price: 2000000,
-    image: "/images/shoes1.jpg",
-    description: `Shoes Collection from brand Puma.`,
-  },
-]; -->
+  <!-- CATATAN REACT ROUTER:
+  1. BrowserRouter itu fungsinya buat mengaktifkan sistem routing menggunakan URL browser. 
+	Kenapa diperlukan?
+	Karena react perlu mengetahui perubahan url ketika pengguna berpindah halaman. Bayangkan BrowserRouter sebagai pengelola navigasi aplikasi atau sebuah pembungkus dari  semua routing.
+	2. Routes merupakan wadah yang berisi kumpulan aturan routing. Bayangkan seperti sebuah daftar yang berisi alamat halaman aplikasi.
+	3. Route digunakan untuk menentukan hubungan antara URL dan komponen halaman.
+	4. App.jsx itu buat mengatur halaman aplikasi, walaupun dia opsional dipakai atau tidak
+	5. Singkatnya pengertian react router adalah library yang membantu kita mengatur navigasi perpindahan halaman dalam aplikasi react.
+	6. Link adalan komponen react router yang digunakan untuk berpindah dari satu halaman ke halaman lainnya.
+	Contoh menarik:
+	<Link to={`/produck/${id}`}>
+	Kenapa menggunakan ${id}?
+	Karena setiap produk memiliki id yang berbeda. Misalnya ketika kita mau melihat detail dari suatu produk, maka fungsi Link akan mengarahkan ke detail sesuai produk yang di klik .
+	Fungsi tanda backtick disitu merupakan template literal js yang memugkinkan kita memasukkan variabel ke dalam string menggunakan ${}.
+	7. Navlink
+	Perbedaan utama:
+	• Link digunakan untuk navigasi biasa.
+	• Navlink digunakan untuk navigasi yang juga perlu mengetahui apakah halaman sedang aktif.
+	Contohnya kita membuat navbar:
+	Kenapa perlu Navlink?
+	Supaya pengguna mengetahui sedang berada di halaman mana.
+	Navlink memiliki fitur otomatis untuk mendeteksi URL yang sedang aktif.
+	8. Dynamic Routes adalah routing yang memiliki bagian URL dengan nilai yang dapat berubah-ubah. Ini berfungsi ketika kita mempunyai banyak produk, misalnya 20 produk dan setiap produk memiliki halaman detail yang berbeda, disinilah Dynamic route digunakan, kan gak mungkin membuat 20 route.
+	Contoh:
+	Jadi, ketika pengguna membuka /produk/1, react route akan menampilkan komponen DetailProductPage.
+	Namun, bagaimana cara mengetahui angka 1 tersebut?
+	Kita membutuhkan useParams().
+	9. useParams() adalah hook dari react router yang digunakan untuk mengambil parameter dari URL. Atau bisa juga mengambil atau mengakses nilai parameter  dinamis dari URL saat ini di dalam komponen React.
+	
+ -->
 
 
-// console.log(event.target.email.value);
-// console.log(event.target.password.value);
+
+ <!-- CATATAN TAILWIND CSS:
+	1. grid = kesamping
+	
+	2. gap = jarak
+	
+	3. bg-white/20 = transparan
+	
+	4. Rounded-full = buat tumpulin kotak
+	
+	5. ukuran itu md, sm, lg, xl, 2xl, 3xl, 4xl, 6,xl dll 
+	
+	6. Leading tight = misal ada 2 kalimat di atas dan di bawah nah itu jarak dari kalimat 1 dan 2
+	
+	7. flex  flex-wrap = biar ga mepet
+	
+	8. Ketebalan font itu ada semi bold, bold, extra bold
+	
+	9. gap-4 itu tampilan hp, md:gap-4 itu tampilan laptop dll
+	
+	10. Biar responsif itu pakek sm:grid-cols-2 dan lg:grid-cols-4
+	
+	11. z-50 it buat navbar tetap berada di atas ketika halaman di scroll
+	
+	12. sticky: Membuat elemen tetap berada di posisinya saat halaman di-scroll, setelah mencapai batas tertentu (dalam hal ini, batas atas layar).
+	
+	13. Untuk gradasinya itu kan pakek bg-gradient-to-br (pojok kanan bawah), bg-gradient-to-b (bawah), bg-gradient-to-r (kanan), bg-gradient-to-tl (pojok kiri atas), bg-gradient-to-tr(pojok kanan atas), bg-gradient-to-bl(pojok kiri bawah)
+	
+	14. Jarak itu mx-auto (untuk ke tengah, jarak dari kanan kiri), ml-auto (untuk ke kiri, jarak dari kanan), mr-auto (untuk kanan, jarak dari kiri)
+	
+	15. Items-start(rata atas), Items-center(rata tengah), items-end(rata bawah)
+	
+	16. bg biasa itu buat warna dan hover:bg itu ketika di arahkan ke teks atau teks itu diklik jadi berubah war
+	
+hover:-translate-y-1 hover:shadow-lg transition -->
+
+
+<!-- CATATAN JS:
+	1. Variabel itu ada -> let, var, const, undefined, NaN
+	2. Scooping itu ada local scoop, dan ada global scoop
+	3. Tipe data di js itu ada -> string(teks dan pakai tanda petik 2 atau 1), number(itu untuk angka yang positif, negatif, atau desimal), boolean(true, false), undefined(itu misal "2" itu dianggap sebagai string bukan number karena ada tanda petiknya), undefined(memasukkan data ketika data itu tidak ditemukan atau tidak ada), NaN((not un number)contohnya misal->  math.sqrt(-1))
+	4. Escaping-> escaping character untuk string (disebut juga tanda khusus untuk string) -> ada \', \", \\, \n, \r, \t, \b, \f
+	5. Literal String -> Literal string di JavaScript adalah nilai teks (string) yang ditulis langsung di dalam kode sumber menggunakan tanda kutip tunggal ('...'), tanda kutip ganda ("..."), atau backtick (`...`).
+  6. Fungsi reduce() pada array di js menjalankan fungsi callback (reducer) pada setiap element array dari kiri ke kanan untuk menghasilkan satu nilai akhir.
+	7. Const adalah kata kunci untuk mendeklarasikan variabel (konstanta) berlingkup blok (block-scoped) yang referensinya tidak dapat diubah setelah diberi nilai awal.
+Pertanyaan:
+bedanya eksplisit dan implisit?
+Perbedaan Eksplsit dan Implisit -> eksplisit berarti kamu menulis instruksi atau konversi secara langsung dan jelas, sedangkan implisit berarti mesin JavaScript melakukannya secara otomatis di balik layar.
+	 -->
+
+
